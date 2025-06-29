@@ -1,8 +1,8 @@
 {
-  "modid": "OnePower",
-  "name": "统一buff",
+  "modid": "StakeablePandoraBox",
+  "name": "可叠加潘多拉魔盒",
   "author_list": ["Dieyou"],
-  "description": "前置mod:loadout",
+  "description": "作者@b站蝴蝶是幼虫",
   "version": "0.1.4",
   "sts_version": "12-22-2020",
   "mts_version": "3.23.2",

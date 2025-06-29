@@ -5,14 +5,14 @@
     <modelVersion>4.0.0</modelVersion>
 
     <!-- 改成你需要的名称 -->
-    <groupId>OnePower</groupId>
+    <groupId>StakeablePandoraBox</groupId>
     <!-- 改成你需要的名称 -->
-    <artifactId>OnePower</artifactId>
+    <artifactId>StakeablePandoraBox</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <!-- 改成你需要的名称 -->
-    <name>OnePower</name>
+    <name>StakeablePandoraBox</name>
     <!-- 改不改由你 -->
     <description>a sts mod.</description>
 
