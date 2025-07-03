@@ -5,14 +5,14 @@
     <modelVersion>4.0.0</modelVersion>
 
     <!-- 改成你需要的名称 -->
-    <groupId>StakeablePandoraBox</groupId>
+    <groupId>MonsterModifier</groupId>
     <!-- 改成你需要的名称 -->
-    <artifactId>StakeablePandoraBox</artifactId>
+    <artifactId>MonsterModifier</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <!-- 改成你需要的名称 -->
-    <name>StakeablePandoraBox</name>
+    <name>MonsterModifier</name>
     <!-- 改不改由你 -->
     <description>a sts mod.</description>
 
@@ -54,13 +54,6 @@
             <version>2.11.0</version>
             <scope>system</scope>
             <systemPath>${Steam.path}/workshop/content/646570/1609158507/StSLib.jar</systemPath>
-        </dependency>
-        <dependency>
-            <groupId>loadout</groupId>
-            <artifactId>loadout</artifactId>
-            <version>2.11.0</version>
-            <scope>system</scope>
-            <systemPath>${Steam.path}/workshop/content/646570/2814267979/loadout.jar</systemPath>
         </dependency>
     </dependencies>
 

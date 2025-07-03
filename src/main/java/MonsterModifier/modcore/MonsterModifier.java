@@ -1,17 +1,22 @@
-package StakeablePandora.modcore;
+package MonsterModifier.modcore;
 
 
+import MonsterModifier.Modifiers.HappyModifier;
+import MonsterModifier.Modifiers.MonsterModifierManager;
+import MonsterModifier.Modifiers.WeakModifier;
 import basemod.*;
-import basemod.helpers.RelicType;
 import basemod.interfaces.*;
 import com.badlogic.gdx.Gdx;
 import com.evacipated.cardcrawl.modthespire.lib.SpireConfig;
 import com.evacipated.cardcrawl.modthespire.lib.SpireInitializer;
 import com.google.gson.Gson;
 import com.megacrit.cardcrawl.core.Settings;
+import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.Keyword;
 import com.megacrit.cardcrawl.localization.RelicStrings;
-import com.megacrit.cardcrawl.relics.PandorasBox;
+import com.megacrit.cardcrawl.localization.UIStrings;
+import com.megacrit.cardcrawl.monsters.AbstractMonster;
+import com.megacrit.cardcrawl.monsters.beyond.AwakenedOne;
 import com.megacrit.cardcrawl.rooms.AbstractRoom;
 
 import java.io.IOException;
@@ -22,18 +27,19 @@ import static com.megacrit.cardcrawl.core.Settings.language;
 
 
 @SpireInitializer
-public class Stakeable implements PostInitializeSubscriber,EditKeywordsSubscriber,OnStartBattleSubscriber, StartActSubscriber , EditStringsSubscriber, EditRelicsSubscriber { // 实现接口
-    public Stakeable() {
+public class MonsterModifier implements PostInitializeSubscriber,EditKeywordsSubscriber,OnStartBattleSubscriber, PostBattleSubscriber,StartActSubscriber , EditStringsSubscriber, EditRelicsSubscriber,OnPlayerTurnStartSubscriber { // 实现接口
+    public MonsterModifier() {
         BaseMod.subscribe(this); // 告诉basemod你要订阅事件
     }
+    public static int turn=0;
     public static final String MyModID = "Muban";
     ModPanel settingsPanel = new ModPanel();
     public static SpireConfig config;
     public static void initialize() throws IOException {
 
-        new Stakeable();
+        new MonsterModifier();
 
-        config=new SpireConfig("StakeablePandora", "StakeablePandora");
+        config=new SpireConfig("MonsterModifier", "MonsterModifier");
         config.load();
 
     }
@@ -59,6 +65,7 @@ public class Stakeable implements PostInitializeSubscriber,EditKeywordsSubscribe
             lang = "ENG"; // 如果没有相应语言的版本，默认加载英语
         }
    BaseMod.loadCustomStringsFile(RelicStrings.class, "StakeableResources/localization/" + lang + "/relics.json");
+        BaseMod.loadCustomStringsFile(UIStrings.class, "StakeableResources/localization/" + lang + "/ui.json");
 
     }
     public static float getYPos(float y) {
@@ -76,6 +83,22 @@ public class Stakeable implements PostInitializeSubscriber,EditKeywordsSubscribe
 
     @Override
     public void receiveOnBattleStart(AbstractRoom abstractRoom) {
+      turn=0;
+        for (AbstractMonster monster : AbstractDungeon.getMonsters().monsters) {
+            if (monster.isDying) {
+                continue;
+            }
+            /*
+            MonsterModifierManager.addModifier(monster, new WeakModifier());
+            MonsterModifierManager.addModifier(monster, new HappyModifier());*/
+        }
+
+        for (AbstractMonster monster : AbstractDungeon.getMonsters().monsters) {
+            if (monster.isDying) {
+                continue;
+            }
+            MonsterModifierManager.onBattleStart(monster);
+        }
     }
 
     @Override
@@ -96,5 +119,16 @@ public class Stakeable implements PostInitializeSubscriber,EditKeywordsSubscribe
                 BaseMod.addKeyword("muban", keyword.NAMES[0], keyword.NAMES, keyword.DESCRIPTION);
             }
         }*/
+    }
+
+    @Override
+    public void receiveOnPlayerTurnStart() {
+        turn++;
+
+    }
+
+    @Override
+    public void receivePostBattle(AbstractRoom abstractRoom) {
+
     }
 }
